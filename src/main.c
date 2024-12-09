@@ -30,12 +30,12 @@ int filteraudio(float *frame, int64_t framecount, float elapsed)
 {
        if(_talk)
        {	
-            if(_audiomemorypos > _audiomemorymax - 1024)
+            if(_audiomemorypos > _audiomemorymax - 2048)
             {
                  _audiomemorypos = 0;
             }
-            memcpy(frame, &(audiomemory[_audiomemorypos]), sizeof(float)*1024);
-            _audiomemorypos += 1024;
+            memcpy(frame, &(audiomemory[_audiomemorypos]), sizeof(float)*2048);
+            _audiomemorypos += 2048;
        } 
        return 1;
 }
@@ -50,8 +50,8 @@ int filtermic(float *frame, int64_t framecount, float elapsed)
         {
             if(_audiomemorypos < AUDIOMEMEORYLEN)
             {
-                  memcpy(&(audiomemory[_audiomemorypos]), frame, sizeof(float)*1024);
-                  _audiomemorypos += 1024;
+                  memcpy(&(audiomemory[_audiomemorypos]), frame, sizeof(float)*2048);
+                  _audiomemorypos += 2048;
             }
         }
 	return 1;
